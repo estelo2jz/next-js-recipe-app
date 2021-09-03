@@ -49,7 +49,7 @@ export default {
             {
               name: "wholeNumber",
               title: "Whole Number",
-              type: "number" 
+              type: "number"
             },
             {
               name: "fraction",
@@ -64,7 +64,7 @@ export default {
               title: "Unit",
               type: "string",
               options: {
-                  list: ["grams", "cup", "Tbsp", "tsp"]
+                list: ["grams", "cup", "Tbsp", "tsp"]
               }
             }
           ],
@@ -72,10 +72,10 @@ export default {
             select: {
               title: "ingredient.name",
               name: "ingredient.name",
-              media: "ingredient.name",
+              media: "ingredient.image",
               wholeNumber: "wholeNumber",
               fraction: "fraction",
-              unit: "unit",
+              unit: "unit"
             },
             prepare({
               title,
@@ -83,11 +83,23 @@ export default {
               media,
               wholeNumber = "(No whole number set)",
               fraction = "(No fraction set)",
-              unit = "(No unit set)"
-            })
+              unit = "(No unit set)",
+            }) {
+              return {
+                title,
+                subtitle: `${wholeNumber} ${fraction} ${unit}`,
+                media,
+              }
+            }
           }
-        }
-      ]
+        },
+      ],
+    },
+    {
+      name: "instructions",
+      title: "Instructions",
+      type: "array",
+      of: [{ type: "block" }]
     }
   ],
-}
+};
